@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.look.mapper.CommunityReplyMapper">
+
+	<!-- 댓글 조회 -->
+	<select id="replyList" parameterType="int" resultType="com.look.model.CommunityReplyDTO">
+		select tbl_reply_board
+			rno, bno, nickname, content, regDate
+		from 
+			where bno = #{bno}		
+	</select>
+	
+	 <!-- 댓글 작성  -->
+	<insert id="replyWrite" parameterType="com.look.model.CommunityReplyDTO">
+		insert into tbl_reply_board(bno, nickname, content) 
+		values(#{bno}, #{nickname}, #{content})
+	</insert>
+		
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete">
+	   delete from tbl_reply_board
+	   where rno = #{rno}
+	   and nickname = #{nickname}
+	</delete>
+	
+	<!-- 아이디 체크 -->
+	<select id="idCheck" resultType="String">
+	   select nickname
+	   from tbl_reply_board
+	   where rno = #{rno}
+	</select>
+
+	<!-- 댓글 수정 -->
+	<update id="modifyReply">
+	   update tbl_reply_board
+	   set content = #{content}
+	   where rno = #{rno} and nickname = #{nickname}
+	</update>
+		
+</mapper>
+

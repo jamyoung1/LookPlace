@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+ /* header */
+    header 
+	{
+	    display: flex;
+	    position:fixed;
+	    left:10%;
+	    justify-content: space-evenly;
+	    border-bottom: 3px solid rgb(255, 56, 142);
+	    align-items: center;
+	    margin: 0 auto;
+	    width:80%;
+	    z-index:99999;
+		background-color:white;
+	}
+	.aside-user-area{
+		position: absolute; top: 85%; left: 37%;
+	}
+    .searchBox {
+      display: flex;
+      width: 40%;
+      height: 42px;
+      justify-content: flex-start;
+    }
+    .searchBox i {
+    	position :relative;
+    	left : 0;
+    	border:1px solid lightgray;
+    	height: 40px;
+    	line-height: 40px;
+    	padding-right: 3px;
+    	color:lightgray;
+    	width:35px;
+    	text-align:center;
+    }
+    .searchBox input {
+      height: 40px;
+      line-height:40px;
+      width:80%;
+      border:1px solid lightgray;
+    }
+
+    .logoBox {
+      width: 170px;
+      height: 132px;
+    }
+    .logoBox img {
+      padding-top: 8%;
+      width: 90%;
+      height: 80%;
+    }
+    
+    .login_area{
+    	position:absolute; top:12%; left:15%;font-size:1em;
+    }
+    
+    .buttonBox {
+      width: 180px;
+      height: 100px;
+      text-align: start;
+      position: relative;
+      right: 5%;
+    }
+    .buttonBox button {
+    	background-color:white;
+    	border:none;
+    	padding-top:30px;
+    }
+    
+    .buttonBox i{
+    	font-size:2rem; 
+    	color:rgb(255, 56, 142);
+    }
+    
+        
+    ::placeholder {
+	  color: gray;
+	  font-size: 0.8rem;
+	  font-weight: 400;
+	  opacity: 1; /* Firefox */
+	  font-style: italic;
+	  font-weight: bold;
+	  text-align:center;
+	  padding-left:10px;
+	  
+	}
+    
+     /* 사이드메뉴 */
+     #showLeft{    	
+     	z-index:9999; 
+     	cursor:pointer
+     }
+     .burger div{
+     	background-color:rgb(255, 56, 142);
+     	width:35px;
+     	height:5px;
+     	margin:5px;
+     	transition:all 0.5s;
+     }
+     
+     .toggle .line1{
+     	transform:rotate(-45deg) translate(-8px,6px);
+     }
+     
+     .toggle .line2{
+     	opacity:0;
+     }
+     
+     .toggle .line3{
+     	transform:rotate(45deg) translate(-8px,-6px);
+     }
+     
+     
+	.sidemenu {
+		background:  rgba(44, 62, 80, 0.96);
+		position: fixed;
+		border-radius:0px 15px 0px 0px;
+		color:white
+	}
+	
+	/* 사이드 메뉴 설정 */
+	.sidemenu-vertical {
+		width: 20%;
+		height: 100%;
+		top: 0;
+		z-index: 1000;
+	}
+	
+	/* 사이드 메뉴 길이만큼 왼쪽으로 숨김 */
+	.sidemenu-left {
+		left: -20%;
+	}
+
+
+	.sidemenu-left.sidemenu-open {
+		left: 0px;
+	}
+
+	.sidemenu,
+	.sidemenu-push {
+		-webkit-transition: all 0.3s ease;
+		-moz-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	    
+    .side_title{
+    	list-style:none;
+    	margin-top:10%;
+    	display:flex;
+		flex-direction:column;
+    }
+    
+    .side_title span{
+    	font-size:1em;
+    }
+    
+    .sidemenu a{
+    	color:white;
+    	font-size:1em;
+    }
+    
+    .sidemenu i{
+    	padding:19px;
+    }
+
+    .side_Detail1{
+    	height:0;
+	  	list-style:none;
+	  	overflow:hidden;
+    }
+    
+    .side_Detail2{
+    	height:0;
+	  	list-style:none;
+	  	overflow:hidden;
+    }
+    
+    .up{
+	  animation-name:slide_up;
+	  animation-duration:.5s;  
+    }
+    
+    .down{
+	  animation-name:slide_down;
+	  animation-duration:.5s;  
+    }
+    
+    .down1{
+	  animation-name:slide_down1;
+	  animation-duration:.5s;  
+    }
+    .side_title{
+    	padding-top:20px; position:absolute; top:17%;left:12%;
+    }
+    .side_Btn{
+    	background-color:rgba(0,0,0,0); 
+    	border: none;
+    	color:white;
+    	font-size:1em;
+    }
+    
+    .rotate_up {
+	    transform: rotate(-180deg);
+	    transition: .5s;
+	}
+	
+	.rotate_down {
+	    transform: rotate(0deg);
+	    transition: .5s;
+	}
+	
+	@keyframes slide_up{
+	  0%{
+	    height:80px;
+	  }
+	  100%{
+	    height:0px;
+	  }
+	}
+
+	@keyframes slide_down{
+	  0%{
+	    height:0px;
+	  }
+	  100%{
+	    height:80px;
+	  }
+	}
+	
+	@keyframes slide_down1{
+	  0%{
+	    height:0px;
+	  }
+	  100%{
+	    height:50px;
+	  }
+	}

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namespace 속성 값이 중요한 이유는 MyBatis가 Mapper인터페이스와 XML을 인터페이스 이름과 
+ 		namespace 속성 값으로 판단하기 때문! 
+ 		
+ 		인터페이스 이름 = namespace 속성 값 
+ 	 -->
+  <mapper namespace="com.look.mapper.TripMapper">
+    
+    <!-- 인기 여행 목록 -->
+    <select id="getList" resultType="com.look.model.TripDTO">
+    
+        select imgno, course, address, place from tbl_best_image order by heart desc
+    
+    </select>
+    
+    <select id="hashtag" resultType="String">
+    	select tag from tbl_best_image where imgno = #{imgno}
+    </select>
+    
+    <!-- 가을 인기 목록 -->
+    <select id="autumnList" resultType="com.look.model.TripDTO">
+    	select imgno,course, address, place from tbl_best_image where tag like concat('%','가을','%') order by heart desc
+    </select>
+    
+    
+    <!-- 전체/지역 목록 -->
+    <select id = "locationList" resultType="com.look.model.TripDTO">
+    		
+    	select * from tbl_best_image 
+    	<if test ="!keyword.equals('전체')">
+    		where address like concat('%',#{keyword},'%') 
+    	</if>
+    	order by heart desc
+    	
+    </select>
+    
+    <!-- 게시물 개수 -->
+    <select id="localTotal" resultType="int">
+        select count(*) from tbl_best_image
+        	 <if test ="!keyword.equals('전체')">
+		    		where address like concat('%',#{keyword},'%') 
+		    </if>
+    </select>
+    
+    
+    
+     <!-- 게시물 목록(페이징) -->
+    <select id="localListPaging" resultType="com.look.model.TripDTO">
+    
+        select * from (
+                select imgno, course, heart, address, place, local, tag
+                from tbl_best_image 
+                <if test ="!keyword.equals('전체')">
+		    		where address like concat('%',#{keyword},'%') 
+		    	</if>
+                order by imgno asc) as T1
+        limit #{skip},#{amount} 
+    
+    </select>
+    
+    <select id="HitGetList" resultType="com.look.model.TripDTO">
+    	select * from (
+                select imgno, course, heart, address, place, local, tag
+                from tbl_best_image 
+                <if test ="!keyword.equals('전체')">
+		    		where address like concat('%',#{keyword},'%') 
+		    	</if>
+                order by heart desc) as T1
+        limit #{skip},#{amount} 
+    </select>
+    
+    <!--상세페이지 조회 -->
+    <select id = "Detailpage" resultType = "com.look.model.TripDTO">
+     
+     	SELECT * FROM tbl_best_image WHERE imgno = #{imgno}
+    
+    </select>
+    
+    <!-- 조회수 증가 -->
+    <update id="updateCount">
+    	UPDATE tbl_best_image SET count = count + 1  WHERE imgno = #{imgno}
+    </update>
+   		
+   		
+   	<!--상페이지 댓글 -->
+   	<select id="replyList" resultType = "com.look.model.TripReplyDTO">
+   		select reno, imgno, nickname, regdate, content from tbl_detail_reply WHERE imgno = #{imgno}
+   	</select>
+   	
+   	<!--상세페이지 댓글 작성  -->
+   	<insert id="insertList">
+   		insert into tbl_detail_reply(imgno, nickname, regdate, content) values(#{imgno}, #{nickname},now(), #{content})
+   	</insert>
+   	
+   	
+   	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+	   delete from tbl_detail_reply where reno = #{reno}
+	</delete>
+   		
+   	<!-- 댓글 수정 -->
+   	<update id="updateReply">
+   	
+   		update tbl_detail_reply SET content = #{content} where reno = #{reno}
+   		
+   	</update>
+   	
+   	<!-- 좋아요  -->
+   	<insert id="insertHeart">
+   		
+   		insert into tbl_heart(nickname, imgno) values(#{nickname}, #{imgno})
+   	</insert>
+   	
+   	<!-- 닉네임이 좋아요한 게시물 유무 확인 -->
+	<select id="nickCheck" resultType = "int">
+	
+		SELECT imgno FROM tbl_heart where nickname= #{nickname}
+	
+	</select>   	
+	
+	<!--좋아요 취소 기능  -->
+	<delete id="unheart">
+		 delete from tbl_heart where imgno = #{imgno} and nickname = #{nickname}
+	</delete>
+	<update id = "minusHeart">
+		update tbl_best_image set heart = heart -1 where imgno = #{imgno}
+	</update>
+	
+	
+	
+	<!--좋아요 테이블 조회  -->
+	<select id="getHeartList" resultType = "com.look.model.TripHeartDTO">
+		select * from tbl_heart
+	</select>
+	
+	<!-- 좋아요 증가 -->
+	<update id="PlusHeart">
+		update tbl_best_image set heart = heart + 1 where imgno = #{imgno}
+	</update>
+	
+   	</mapper>

@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+	
+	/* 애니메이션 정의 */
+	@keyframes fadeInLeft {
+        0% {
+            opacity: 0;
+            transform: translate3d(-100%, 0, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+    @keyframes fadeInRight {
+        0% {
+            opacity: 0;
+            transform: translate3d(100%, 0, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+    .test_obj{
+    	position: relative;
+        animation: fadeInLeft 3s;
+        animation-iteration-count:1;
+    }
+      .test_obj2{
+    	position: relative;
+        animation: fadeInRight 3s;
+        animation-iteration-count:1;
+    }
+  
+
+	/* main */
+	.m_img{
+		margin-bottom:50px;
+		display: flex;
+		 text-align: center;
+	}
+	.m_main{
+		overflow-x: hidden;
+		width:70%;
+	}
+	
+	.firstSection{
+		display:flex; 
+		flex-direction: column; 
+		width:100%;
+		z-index:-1;
+	}
+	.firstInLeft{
+		width:50%; 
+	}
+	.firstInLeft img{
+		width: 70%;
+		height: 300px;
+	}
+	.firstRight{
+		width:50%; 
+		padding: 40px;
+	}
+	.firstRight button{
+		background-color: rgb(255, 56, 142);
+		color: white;
+		font-size: 1.2rem;
+		font-weight: 500;
+		border: 1px solid rgba(0, 0, 0, 0);
+		border-radius: 15px;
+		margin-top:30px;
+	}
+	
+	.secondSection
+	{
+		margin-top:10vh;
+	}
+	.post-slider{
+	  width:88%;
+	  margin:0px auto;
+	  position:relative;
+	}
+	.post-slider .silder-title{
+	  text-align:center;
+	  margin:30px auto;
+	}
+	.post-slider .next{
+	  position:absolute;
+	  top:25%;
+	  right:2%;
+	  font-size:2em;
+	  color:rgb(255, 56, 142);
+	  cursor: pointer;
+	  z-index:999;
+	}
+	.post-slider .prev{
+	  position:absolute;
+	  top:25%;
+	  left:2%;
+	  font-size:2em;
+	  color:rgb(255, 56, 142);
+	  cursor: pointer;
+	  z-index:999;
+	}
+	.post-slider .post-wrapper{
+	
+	  width:100%;
+	  height:350px;
+	  margin:0px auto;
+	  overflow: hidden;
+	  padding:10px 0px 10px 0px;
+	}
+	.post-slider .post-wrapper .post{
+	  width:300px;
+	  height:300px;
+	  margin:0px 10px;
+	  display:inline-block;
+	  background:white;
+	  border-radius: 5px;
+	}
+	.post-slider .post-wrapper .post .post-info{
+	  font-size:15px;
+	  height:30%;
+	  padding-left:10px;
+	}
+	.post-slider .post-wrapper .post .slider-image{
+	  width:100%;
+	  height:175px;
+	  border-top-left-radius:5px;
+	  border-top-right-radius:5px;
+	}
+	
+	.post-info a{
+		font-size: 1.2rem;
+	}
